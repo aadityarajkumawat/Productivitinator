@@ -1,9 +1,12 @@
-import { register } from './mutations/register'
-import { login } from './mutations/login'
 import { addSubject } from './mutations/addSubject'
+import { login } from './mutations/login'
+import { register } from './mutations/register'
+import { getSubjects } from './queries/getSubjects'
 
 export interface ResolversI {
-    Query: {}
+    Query: {
+        getSubjects: typeof getSubjects
+    }
     Mutation: {
         register: typeof register
         login: typeof login
@@ -12,7 +15,9 @@ export interface ResolversI {
 }
 
 let Resolvers: ResolversI = {
-    Query: {},
+    Query: {
+        getSubjects,
+    },
     Mutation: {
         register,
         login,

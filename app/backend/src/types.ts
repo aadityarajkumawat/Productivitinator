@@ -36,3 +36,8 @@ export interface AddSubjectResponse {
     subject: Subject | null
     error: string | null
 }
+
+export interface GetSubjectsResponse {
+    subjects: Array<Subject> | null
+    error: string | null
+}
