@@ -1,0 +1,36 @@
+{
+  "name": "productivitinator",
+  "version": "1.0.0",
+  "description": "A productivity app on steroids",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aadityarajkumawat/Productivitinator.git"
+  },
+  "keywords": [
+    "node",
+    "typescript",
+    "graphql",
+    "redis",
+    "postgres",
+    "docker"
+  ],
+  "author": "Aditya Raj Kumawat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aadityarajkumawat/Productivitinator/issues"
+  },
+  "homepage": "https://github.com/aadityarajkumawat/Productivitinator#readme",
+  "devDependencies": {
+    "@types/node": "^16.6.1",
+    "ts-node": "^10.2.0",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "graphql-yoga": "^1.18.3",
+    "prisma": "^2.29.0"
+  }
+}
