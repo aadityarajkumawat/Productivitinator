@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma, User } from '@prisma/client'
+import { PrismaClient, Prisma, User, Subject } from '@prisma/client'
 
 export interface ResolverContext {
     request: Express.Request & { session: { userId: number } }
@@ -22,5 +22,17 @@ export interface RegisterInput {
 }
 export interface AuthResponse {
     user: Omit<User, 'password'> | null
+    error: string | null
+}
+
+export interface AddSubjectInput {
+    subjectName: string
+    instructor: string
+    credits: number
+    semester: number
+}
+
+export interface AddSubjectResponse {
+    subject: Subject | null
     error: string | null
 }

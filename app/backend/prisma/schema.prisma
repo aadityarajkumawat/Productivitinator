@@ -22,7 +22,7 @@ model Subject {
     userId       Int
     createdAt    DateTime      @default(now())
     subjectName  String
-    teacher      String
+    instructor   String
     credits      Int
     semester     Int
     collegeTasks CollegeTask[]

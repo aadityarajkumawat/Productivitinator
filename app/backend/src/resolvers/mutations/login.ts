@@ -1,5 +1,5 @@
 import * as argon2 from 'argon2'
-import { AuthResponse, LoginInput, ResolverContext } from 'src/types'
+import { AuthResponse, LoginInput, ResolverContext } from '../../types'
 
 export async function login(
     _: any,
