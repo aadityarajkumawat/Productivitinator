@@ -1,0 +1,29 @@
+type Subject {
+    name: String!
+    credits: Int!
+    instructor: String!
+}
+type GetSubjectsResponse {
+    subjects: Subject
+    error: String
+}
+
+type User {
+    userId: Int!
+    username: String!
+    name: String!
+}
+
+type AuthResponse {
+    user: User
+    error: String
+}
+
+type Query {
+    getSubjects: GetSubjectsResponse!
+}
+
+type Mutation {
+    login(username: String!, password: String!): AuthResponse!
+    register(name: String!, username: String!, password: String!): AuthResponse!
+}
