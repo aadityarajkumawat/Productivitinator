@@ -10,6 +10,7 @@ export const SidebarContainer = styled.div`
         #414141 95.13%
     );
 `
+
 export const SidebarProfile = styled.div`
     width: 100%;
     padding: 30px 20px;
