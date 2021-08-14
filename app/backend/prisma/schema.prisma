@@ -14,6 +14,7 @@ model User {
     name      String
     password  String
     subjects  Subject[]
+    semester  Semester?
 }
 
 model Subject {
@@ -37,4 +38,13 @@ model CollegeTask {
     timeAssigned DateTime
     lastDate     DateTime
     completed    Boolean
+}
+
+model Semester {
+    metaId        Int      @id @default(autoincrement())
+    user          User     @relation(fields: [userId], references: [userId])
+    userId        Int
+    semester      Int      @default(0)
+    semesterStart DateTime @default(now())
+    semesterEnd   DateTime
 }
