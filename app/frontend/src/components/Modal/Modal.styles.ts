@@ -8,5 +8,5 @@ export const ModalOverlay = styled.div`
     right: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #00000060;
+    background-color: #000000ba;
 `

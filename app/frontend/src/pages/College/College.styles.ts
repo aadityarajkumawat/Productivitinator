@@ -20,3 +20,10 @@ export const CollegeContainer = styled.div`
         font-size: 30px;
     }
 `
+
+export const PositionUSBar = styled.div`
+    position: absolute;
+    top: 170px;
+    left: 50%;
+    transform: translateX(-50%);
+`

@@ -1,5 +1,9 @@
+import { useRef, useState } from 'react'
+import { Modal } from '../../components/Modal/Modal'
 import { SubjectItem } from '../../components/SubjectItem/SubjectItem'
-import { CollegeContainer } from './College.styles'
+import { UniversalSearchBar } from '../../components/UniversalSearchBar/UniversalSearchBar'
+import { useEventListener } from '../../hooks/useEventListener'
+import { CollegeContainer, PositionUSBar } from './College.styles'
 
 const college = {
     semester: 3,
@@ -9,18 +13,30 @@ const college = {
 
 const subjects = [
     { id: 1, name: 'Trignometery', credits: 10, instructor: 'Aditya' },
-    {
-        id: 1,
-        name: 'Data Structures and Algorithms',
-        credits: 10,
-        instructor: 'Aditya',
-    },
-    { id: 1, name: 'Trignometery', credits: 10, instructor: 'Aditya' },
-    { id: 1, name: 'Trignometery', credits: 10, instructor: 'Aditya' },
-    { id: 1, name: 'Trignometery', credits: 10, instructor: 'Aditya' },
 ]
 
 export function College() {
+    const [isUSOpen, setUSOpen] = useState<boolean>(false)
+    let universalSearchRef = useRef<HTMLInputElement | null>(null)
+
+    function closeUniversalSearch() {
+        setUSOpen(false)
+    }
+
+    function toggleUniversalSearch() {
+        setUSOpen((o) => !o)
+    }
+
+    useEventListener('keydown', (evt) => {
+        if (evt.key.toLowerCase() === 'u' && evt.ctrlKey) {
+            evt.preventDefault()
+            toggleUniversalSearch()
+            universalSearchRef.current?.focus()
+        } else if (evt.key === 'Escape') {
+            closeUniversalSearch()
+        }
+    })
+
     return (
         <CollegeContainer>
             <div className='heading'>
@@ -35,6 +51,14 @@ export function College() {
                     <SubjectItem key={idx} {...subject} />
                 ))}
             </div>
+
+            <Modal open={isUSOpen} setClose={closeUniversalSearch}>
+                <PositionUSBar>
+                    <UniversalSearchBar
+                        universalSearchBarRef={universalSearchRef}
+                    />
+                </PositionUSBar>
+            </Modal>
         </CollegeContainer>
     )
 }
