@@ -6,8 +6,8 @@ import { Home } from './pages/Home/Home'
 function App() {
     return (
         <div className='d-flex'>
-            <Sidebar />
             <Router>
+                <Sidebar />
                 <Switch>
                     <Route exact path='/' component={Home} />
                     <Route exact path='/college' component={College} />

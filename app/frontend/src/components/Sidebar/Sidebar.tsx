@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom'
 import { SidebarItem } from '../SidebarItem/SidebarItem'
 import {
     ProfileDetails,
@@ -8,6 +9,16 @@ import {
 } from './Sidebar.styles'
 
 export function Sidebar() {
+    let router = useHistory()
+
+    function pushToTaskTracker() {
+        router.push('/task-tracker')
+    }
+
+    function pushToCollege() {
+        router.push('/college')
+    }
+
     return (
         <SidebarContainer>
             <SidebarProfile>
@@ -17,8 +28,8 @@ export function Sidebar() {
                     <ProfileTag>@aditya</ProfileTag>
                 </ProfileDetails>
             </SidebarProfile>
-            <SidebarItem>Task Tracker</SidebarItem>
-            <SidebarItem>College</SidebarItem>
+            <SidebarItem onClick={pushToTaskTracker}>Task Tracker</SidebarItem>
+            <SidebarItem onClick={pushToCollege}>College</SidebarItem>
         </SidebarContainer>
     )
 }
