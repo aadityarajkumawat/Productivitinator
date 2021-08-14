@@ -16,7 +16,10 @@ async function main() {
 
     server.express.use(sessionMiddleware(process.env.COOKIE_SECRET as string))
     server.start(
-        { cors: { origin: '*', credentials: true }, port: process.env.PORT },
+        {
+            cors: { origin: 'http://localhost:3000', credentials: true },
+            port: process.env.PORT,
+        },
         (options) => {
             console.log(`Server is running at port ${options.port}`)
         },
