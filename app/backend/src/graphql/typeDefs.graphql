@@ -28,8 +28,14 @@ type GetSubjectsResponse {
     error: String
 }
 
+type GetUserResponse {
+    user: User
+    error: String
+}
+
 type Query {
     getSubjects: GetSubjectsResponse!
+    getUser: GetUserResponse!
 }
 
 type Mutation {
