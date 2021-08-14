@@ -37,6 +37,7 @@
         "@prisma/client": "2.29.0",
         "argon2": "^0.28.2",
         "connect-redis": "^6.0.0",
+        "dayjs": "^1.10.6",
         "dotenv-safe": "^8.2.0",
         "express-session": "^1.17.2",
         "graphql-yoga": "^1.18.3",

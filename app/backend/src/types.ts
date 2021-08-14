@@ -1,4 +1,5 @@
-import { PrismaClient, Prisma, User, Subject } from '@prisma/client'
+import { PrismaClient, Prisma, User, Subject, Semester } from '@prisma/client'
+import dayjs from 'dayjs'
 
 export interface ResolverContext {
     request: Express.Request & { session: { userId: number } }
@@ -44,5 +45,15 @@ export interface GetSubjectsResponse {
 
 export interface GetUserResponse {
     user: Omit<User, 'password' | 'createdAt'> | null
+    error: string | null
+}
+
+export interface CreateSemesterInput {
+    semester: number
+    semesterEnd: dayjs.Dayjs
+}
+
+export interface CreateSemesterResponse {
+    semester: Semester | null
     error: string | null
 }

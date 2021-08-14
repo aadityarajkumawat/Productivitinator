@@ -1,3 +1,5 @@
+scalar Date
+
 type User {
     userId: Int!
     username: String!
@@ -33,6 +35,19 @@ type GetUserResponse {
     error: String
 }
 
+type Semester {
+    metaId: Int!
+    userId: Int!
+    semester: Int!
+    semesterStart: Date!
+    semesterEnd: Date!
+}
+
+type SemesterCreatedResponse {
+    semester: Semester
+    error: String
+}
+
 type Query {
     getSubjects: GetSubjectsResponse!
     getUser: GetUserResponse!
@@ -47,4 +62,5 @@ type Mutation {
         credits: Int!
         semester: Int!
     ): AddSubjectResponse!
+    createSemester(semester: Int!, semesterEnd: Date!): SemesterCreatedResponse!
 }
