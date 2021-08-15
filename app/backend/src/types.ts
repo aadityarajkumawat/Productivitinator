@@ -57,3 +57,8 @@ export interface CreateSemesterResponse {
     semester: Semester | null
     error: string | null
 }
+
+export interface GetSemesterResponse {
+    semester: Semester | null
+    error: string | null
+}

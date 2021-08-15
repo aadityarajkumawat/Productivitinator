@@ -48,9 +48,15 @@ type SemesterCreatedResponse {
     error: String
 }
 
+type GetSemesterResponse {
+    semester: Semester
+    error: String
+}
+
 type Query {
     getSubjects: GetSubjectsResponse!
     getUser: GetUserResponse!
+    getSemester: GetSemesterResponse!
 }
 
 type Mutation {

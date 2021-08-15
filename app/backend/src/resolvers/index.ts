@@ -7,11 +7,13 @@ import { GraphQLScalarType } from 'graphql'
 import dayjs from 'dayjs'
 import { formatDate } from '../helpers/formatDate'
 import { createSemester } from './mutations/createSemester'
+import { getSemester } from './queries/getSemester'
 
 export interface ResolversI {
     Query: {
         getSubjects: typeof getSubjects
         getUser: typeof getUser
+        getSemester: typeof getSemester
     }
     Mutation: {
         register: typeof register
@@ -26,6 +28,7 @@ let Resolvers: ResolversI = {
     Query: {
         getSubjects,
         getUser,
+        getSemester,
     },
     Mutation: {
         register,
