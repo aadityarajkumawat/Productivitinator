@@ -46,3 +46,19 @@ export interface GetCollegeQueryResponse {
     getSemester: GetSemesterResponse
     getSubjects: GetSubjectsResponse
 }
+
+export interface CollegeTask {
+    taskId: number
+    subjectId: number
+    taskName: string
+    timeAssigned: string
+    lastDate: string
+    completed: boolean
+    completedAt: string
+    comment: string
+}
+
+export interface GetTasksQueryResponse {
+    getTasks: { tasks: Array<CollegeTask>; error: string }
+    getSubject: { subject: Subject; error: string }
+}

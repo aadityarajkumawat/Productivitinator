@@ -25,6 +25,11 @@ type AddSubjectResponse {
     error: String
 }
 
+type GetSubjectResponse {
+    subject: Subject
+    error: String
+}
+
 type GetSubjectsResponse {
     subjects: [Subject]
     error: String
@@ -79,6 +84,7 @@ type Query {
     getUser: GetUserResponse!
     getSemester: GetSemesterResponse!
     getTasks(subjectId: Int!): GetTaskResponse!
+    getSubject(subjectId: Int!): GetSubjectResponse!
 }
 
 type Mutation {

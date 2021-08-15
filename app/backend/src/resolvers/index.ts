@@ -10,6 +10,7 @@ import { createSemester } from './mutations/createSemester'
 import { getSemester } from './queries/getSemester'
 import { addTask } from './mutations/addTask'
 import { getTasks } from './queries/getTasks'
+import { getSubject } from './queries/getSubject'
 
 export interface ResolversI {
     Query: {
@@ -17,6 +18,7 @@ export interface ResolversI {
         getUser: typeof getUser
         getSemester: typeof getSemester
         getTasks: typeof getTasks
+        getSubject: typeof getSubject
     }
     Mutation: {
         register: typeof register
@@ -34,6 +36,7 @@ let Resolvers: ResolversI = {
         getUser,
         getSemester,
         getTasks,
+        getSubject,
     },
     Mutation: {
         register,

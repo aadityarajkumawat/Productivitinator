@@ -52,6 +52,12 @@ export const CollegeTasksContainer = styled.section`
         border-radius: 3px;
         padding: 20px;
         width: 700px;
+        height: 670px;
+        text-align: center;
+    }
+
+    .faded-text {
+        opacity: 0.6;
     }
 `
 
@@ -79,6 +85,7 @@ export const CollegeTaskItemContainer = styled.div`
     .assigned-submission {
         justify-content: space-between;
         font-size: 15px;
+        margin: 5px 0;
         span {
             margin-right: 20px;
         }

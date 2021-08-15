@@ -16,7 +16,7 @@ function App() {
                     <Route exact path='/add-subject' component={AddSubject} />
                     <Route
                         exact
-                        path='/college-tasks'
+                        path='/college-tasks/:id'
                         component={CollegeTasks}
                     />
                 </Switch>
