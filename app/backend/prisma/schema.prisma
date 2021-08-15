@@ -30,13 +30,14 @@ model Subject {
 }
 
 model CollegeTask {
-    taskId       Int      @id @default(autoincrement())
-    subject      Subject  @relation(fields: [subjectId], references: [subjectId])
+    taskId       Int       @id @default(autoincrement())
+    subject      Subject   @relation(fields: [subjectId], references: [subjectId])
     subjectId    Int
-    createdAt    DateTime @default(now())
+    createdAt    DateTime  @default(now())
     taskName     String
     timeAssigned DateTime
     lastDate     DateTime
+    completedAt  DateTime?
     completed    Boolean
 }
 

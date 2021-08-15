@@ -53,10 +53,31 @@ type GetSemesterResponse {
     error: String
 }
 
+type Task {
+    taskId: Int!
+    subjectId: Int!
+    taskName: String!
+    timeAssigned: Date!
+    lastDate: Date!
+    completed: Boolean!
+    completedAt: Date
+}
+
+type AddTaskResponse {
+    task: Task
+    error: String
+}
+
+type GetTaskResponse {
+    tasks: [Task]
+    error: String
+}
+
 type Query {
     getSubjects: GetSubjectsResponse!
     getUser: GetUserResponse!
     getSemester: GetSemesterResponse!
+    getTasks: GetTaskResponse!
 }
 
 type Mutation {
@@ -69,4 +90,10 @@ type Mutation {
         semester: Int!
     ): AddSubjectResponse!
     createSemester(semester: Int!, semesterEnd: Date!): SemesterCreatedResponse!
+    addTask(
+        subjectId: Int!
+        taskName: String!
+        timeAssigned: Date!
+        lastDate: Date!
+    ): AddTaskResponse!
 }

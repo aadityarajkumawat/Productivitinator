@@ -1,4 +1,11 @@
-import { PrismaClient, Prisma, User, Subject, Semester } from '@prisma/client'
+import {
+    PrismaClient,
+    Prisma,
+    User,
+    Subject,
+    Semester,
+    CollegeTask,
+} from '@prisma/client'
 import dayjs from 'dayjs'
 
 export interface ResolverContext {
@@ -60,5 +67,20 @@ export interface CreateSemesterResponse {
 
 export interface GetSemesterResponse {
     semester: Semester | null
+    error: string | null
+}
+
+export type AddTaskInput = {
+    taskId: number
+    subjectId: number
+    createdAt: Date
+    taskName: string
+    timeAssigned: dayjs.Dayjs
+    lastDate: dayjs.Dayjs
+    completed: boolean
+}
+
+export interface AddTaskResponse {
+    task: CollegeTask | null
     error: string | null
 }

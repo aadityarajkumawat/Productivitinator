@@ -8,6 +8,7 @@ import dayjs from 'dayjs'
 import { formatDate } from '../helpers/formatDate'
 import { createSemester } from './mutations/createSemester'
 import { getSemester } from './queries/getSemester'
+import { addTask } from './mutations/addTask'
 
 export interface ResolversI {
     Query: {
@@ -20,6 +21,7 @@ export interface ResolversI {
         login: typeof login
         addSubject: typeof addSubject
         createSemester: typeof createSemester
+        addTask: typeof addTask
     }
     Date: GraphQLScalarType
 }
@@ -35,6 +37,7 @@ let Resolvers: ResolversI = {
         login,
         addSubject,
         createSemester,
+        addTask,
     },
     Date: new GraphQLScalarType({
         name: 'Date',
