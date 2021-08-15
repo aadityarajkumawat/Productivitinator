@@ -39,6 +39,7 @@ model CollegeTask {
     lastDate     DateTime
     completedAt  DateTime?
     completed    Boolean
+    comment      String?
 }
 
 model Semester {

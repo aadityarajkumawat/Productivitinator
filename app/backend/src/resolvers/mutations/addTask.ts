@@ -9,7 +9,7 @@ export async function addTask(
         return { task: null, error: 'You are not authenticated' }
 
     try {
-        let { taskName, lastDate, subjectId, timeAssigned } = args
+        let { taskName, lastDate, subjectId, timeAssigned, comment } = args
         let collegeTask = await prisma.collegeTask.create({
             data: {
                 taskName,
@@ -17,6 +17,7 @@ export async function addTask(
                 lastDate: lastDate.toDate(),
                 timeAssigned: timeAssigned.toDate(),
                 subject: { connect: { subjectId } },
+                comment,
             },
         })
         if (!collegeTask) return { task: null, error: 'Error creating task' }

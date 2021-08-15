@@ -9,12 +9,14 @@ import { formatDate } from '../helpers/formatDate'
 import { createSemester } from './mutations/createSemester'
 import { getSemester } from './queries/getSemester'
 import { addTask } from './mutations/addTask'
+import { getTasks } from './queries/getTasks'
 
 export interface ResolversI {
     Query: {
         getSubjects: typeof getSubjects
         getUser: typeof getUser
         getSemester: typeof getSemester
+        getTasks: typeof getTasks
     }
     Mutation: {
         register: typeof register
@@ -31,6 +33,7 @@ let Resolvers: ResolversI = {
         getSubjects,
         getUser,
         getSemester,
+        getTasks,
     },
     Mutation: {
         register,

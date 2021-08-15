@@ -78,9 +78,19 @@ export type AddTaskInput = {
     timeAssigned: dayjs.Dayjs
     lastDate: dayjs.Dayjs
     completed: boolean
+    comment: string
 }
 
 export interface AddTaskResponse {
     task: CollegeTask | null
+    error: string | null
+}
+
+export interface CollegeTasksInput {
+    subjectId: number
+}
+
+export interface GetCollegeTasksResponse {
+    tasks: Array<CollegeTask> | null
     error: string | null
 }

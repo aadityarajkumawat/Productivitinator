@@ -1,24 +1,25 @@
-import { GetSubjectsResponse, ResolverContext } from 'src/types'
+import {
+    CollegeTasksInput,
+    GetCollegeTasksResponse,
+    ResolverContext,
+} from '../../types'
 
 export async function getTasks(
     _: any,
-    __: any,
+    args: CollegeTasksInput,
     { request, prisma }: ResolverContext,
-): Promise<GetSubjectsResponse> {
+): Promise<GetCollegeTasksResponse> {
     if (!request.session.userId)
-        return { subjects: null, error: 'You are not authenticated' }
+        return { tasks: null, error: 'You are not authenticated' }
 
     try {
-        let subjects = await prisma.subject.findMany({
-            where: {
-                userId: request.session.userId,
-            },
+        let tasks = await prisma.collegeTask.findMany({
+            where: { subjectId: args.subjectId },
         })
-        if (!subjects)
-            return { subjects: null, error: 'Error fetching subjects' }
-        return { subjects, error: null }
+        if (!tasks) return { tasks: null, error: 'Error fetching tasks' }
+        return { tasks, error: null }
     } catch (e) {
         console.log(e.message)
-        return { subjects: null, error: e.message }
+        return { tasks: null, error: e.message }
     }
 }

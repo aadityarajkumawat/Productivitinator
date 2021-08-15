@@ -61,6 +61,7 @@ type Task {
     lastDate: Date!
     completed: Boolean!
     completedAt: Date
+    comment: String
 }
 
 type AddTaskResponse {
@@ -77,7 +78,7 @@ type Query {
     getSubjects: GetSubjectsResponse!
     getUser: GetUserResponse!
     getSemester: GetSemesterResponse!
-    getTasks: GetTaskResponse!
+    getTasks(subjectId: Int!): GetTaskResponse!
 }
 
 type Mutation {
@@ -95,5 +96,6 @@ type Mutation {
         taskName: String!
         timeAssigned: Date!
         lastDate: Date!
+        comment: String
     ): AddTaskResponse!
 }
