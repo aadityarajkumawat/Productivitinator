@@ -14,3 +14,20 @@ export interface GetUserResponse {
 export interface GetUserQueryResponse {
     getUser: GetUserResponse
 }
+
+export interface Semester {
+    metaId: number
+    userId: number
+    semester: number
+    semesterStart: Date
+    semesterEnd: Date
+}
+
+export interface GetSemesterResponse {
+    semester: Semester
+    error: string
+}
+
+export interface GetSemesterQueryResponse {
+    getSemester: GetSemesterResponse
+}

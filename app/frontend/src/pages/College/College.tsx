@@ -1,15 +1,13 @@
 import { useRef, useState } from 'react'
+import { useQuery } from 'urql'
 import { Modal } from '../../components/Modal/Modal'
 import { SubjectItem } from '../../components/SubjectItem/SubjectItem'
 import { UniversalSearchBar } from '../../components/UniversalSearchBar/UniversalSearchBar'
+import { GET_SEMESTER } from '../../graphql/getSemester'
+import { GetSemesterQueryResponse } from '../../graphql/types'
+import { ifDataFound } from '../../helpers/ifDataFound'
 import { useEventListener } from '../../hooks/useEventListener'
 import { CollegeContainer, PositionUSBar } from './College.styles'
-
-const college = {
-    semester: 3,
-    startDate: '16/08/2021',
-    endDate: '21/08/2021',
-}
 
 const subjects = [
     { id: 1, name: 'Trignometery', credits: 10, instructor: 'Aditya' },
@@ -17,7 +15,12 @@ const subjects = [
 
 export function College() {
     const [isUSOpen, setUSOpen] = useState<boolean>(false)
+    const [{ data, fetching }] = useQuery<GetSemesterQueryResponse>({
+        query: GET_SEMESTER,
+    })
     let universalSearchRef = useRef<HTMLInputElement | null>(null)
+
+    console.log(data)
 
     function closeUniversalSearch() {
         setUSOpen(false)
@@ -40,9 +43,20 @@ export function College() {
     return (
         <CollegeContainer>
             <div className='heading'>
-                <span className='head'>Semester: {college.semester}</span>
+                <span className='head'>
+                    Semester:
+                    {ifDataFound(data, fetching)
+                        ? data!.getSemester.semester.semester
+                        : 0}
+                </span>
                 <span className='date'>
-                    ({college.startDate} - {college.endDate})
+                    (
+                    {ifDataFound(data, fetching)
+                        ? data!.getSemester.semester.semesterStart +
+                          '-' +
+                          data?.getSemester.semester.semesterEnd
+                        : ''}
+                    )
                 </span>
             </div>
             <div className='listOf'>Subjects</div>

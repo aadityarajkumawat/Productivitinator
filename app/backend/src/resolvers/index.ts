@@ -43,7 +43,7 @@ let Resolvers: ResolversI = {
             return dayjs(formatDate(value))
         },
         serialize(value: dayjs.Dayjs) {
-            return dayjs(value).format('DD-MM-YYYY')
+            return dayjs(value).format('DD/MM/YYYY')
         },
     }),
 }
