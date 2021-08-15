@@ -20,7 +20,7 @@ export async function addSubject(
             },
         })
         if (!subject) return { subject: null, error: 'Error adding subject' }
-        return { subject, error: null }
+        return { subject: subject, error: null }
     } catch (e) {
         console.log(e.message)
         return { subject: null, error: e.message }

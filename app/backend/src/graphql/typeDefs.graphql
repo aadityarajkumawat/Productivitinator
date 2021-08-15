@@ -79,6 +79,11 @@ type GetTaskResponse {
     error: String
 }
 
+type GetDeleteTaskResponse {
+    task: Task
+    error: String
+}
+
 type Query {
     getSubjects: GetSubjectsResponse!
     getUser: GetUserResponse!
@@ -104,4 +109,5 @@ type Mutation {
         lastDate: Date!
         comment: String
     ): AddTaskResponse!
+    deleteTask(taskId: Int!): GetDeleteTaskResponse!
 }
