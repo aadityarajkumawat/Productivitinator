@@ -56,6 +56,7 @@ export function College() {
                 <PositionUSBar>
                     <UniversalSearchBar
                         universalSearchBarRef={universalSearchRef}
+                        closeUniversalSearch={closeUniversalSearch}
                     />
                 </PositionUSBar>
             </Modal>
