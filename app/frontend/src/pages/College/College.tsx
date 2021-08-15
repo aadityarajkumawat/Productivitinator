@@ -1,41 +1,17 @@
-import { useRef, useState } from 'react'
 import { useQuery } from 'urql'
-import { Modal } from '../../components/Modal/Modal'
+import { OpenUniversalSearch } from '../../components/OpenUniversalSearch/OpenUniversalSearch'
 import { SubjectItem } from '../../components/SubjectItem/SubjectItem'
-import { UniversalSearchBar } from '../../components/UniversalSearchBar/UniversalSearchBar'
 import { GET_COLLEGE } from '../../graphql/getSemester'
 import { GetCollegeQueryResponse } from '../../graphql/types'
 import { ifDataFound } from '../../helpers/ifDataFound'
-import { useEventListener } from '../../hooks/useEventListener'
-import { CollegeContainer, PositionUSBar } from './College.styles'
+import { useUniversalSearch } from '../../hooks/useUniversalSearch'
+import { CollegeContainer } from './College.styles'
 
 export function College() {
-    const [isUSOpen, setUSOpen] = useState<boolean>(false)
+    let search = useUniversalSearch()
     const [{ data, fetching }] = useQuery<GetCollegeQueryResponse>({
         query: GET_COLLEGE,
     })
-    let universalSearchRef = useRef<HTMLInputElement | null>(null)
-
-    console.log(data)
-
-    function closeUniversalSearch() {
-        setUSOpen(false)
-    }
-
-    function toggleUniversalSearch() {
-        setUSOpen((o) => !o)
-    }
-
-    useEventListener('keydown', (evt) => {
-        if (evt.key.toLowerCase() === 'u' && evt.ctrlKey) {
-            evt.preventDefault()
-            toggleUniversalSearch()
-            universalSearchRef.current?.focus()
-        } else if (evt.key === 'Escape') {
-            closeUniversalSearch()
-        }
-    })
-
     return (
         <CollegeContainer>
             <div className='heading'>
@@ -66,14 +42,7 @@ export function College() {
                 )}
             </div>
 
-            <Modal open={isUSOpen} setClose={closeUniversalSearch}>
-                <PositionUSBar>
-                    <UniversalSearchBar
-                        universalSearchBarRef={universalSearchRef}
-                        closeUniversalSearch={closeUniversalSearch}
-                    />
-                </PositionUSBar>
-            </Modal>
+            <OpenUniversalSearch {...search} />
         </CollegeContainer>
     )
 }
