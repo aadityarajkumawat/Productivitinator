@@ -3,20 +3,16 @@ import { useQuery } from 'urql'
 import { Modal } from '../../components/Modal/Modal'
 import { SubjectItem } from '../../components/SubjectItem/SubjectItem'
 import { UniversalSearchBar } from '../../components/UniversalSearchBar/UniversalSearchBar'
-import { GET_SEMESTER } from '../../graphql/getSemester'
-import { GetSemesterQueryResponse } from '../../graphql/types'
+import { GET_COLLEGE } from '../../graphql/getSemester'
+import { GetCollegeQueryResponse } from '../../graphql/types'
 import { ifDataFound } from '../../helpers/ifDataFound'
 import { useEventListener } from '../../hooks/useEventListener'
 import { CollegeContainer, PositionUSBar } from './College.styles'
 
-const subjects = [
-    { id: 1, name: 'Trignometery', credits: 10, instructor: 'Aditya' },
-]
-
 export function College() {
     const [isUSOpen, setUSOpen] = useState<boolean>(false)
-    const [{ data, fetching }] = useQuery<GetSemesterQueryResponse>({
-        query: GET_SEMESTER,
+    const [{ data, fetching }] = useQuery<GetCollegeQueryResponse>({
+        query: GET_COLLEGE,
     })
     let universalSearchRef = useRef<HTMLInputElement | null>(null)
 
@@ -61,9 +57,13 @@ export function College() {
             </div>
             <div className='listOf'>Subjects</div>
             <div>
-                {subjects.map((subject, idx) => (
-                    <SubjectItem key={idx} {...subject} />
-                ))}
+                {ifDataFound(data, fetching) ? (
+                    data!.getSubjects.subjects.map((subject, idx) => (
+                        <SubjectItem key={idx} {...subject} />
+                    ))
+                ) : (
+                    <div></div>
+                )}
             </div>
 
             <Modal open={isUSOpen} setClose={closeUniversalSearch}>

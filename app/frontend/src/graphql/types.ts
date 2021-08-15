@@ -28,6 +28,21 @@ export interface GetSemesterResponse {
     error: string
 }
 
-export interface GetSemesterQueryResponse {
+export interface Subject {
+    userId: number
+    subjectId: number
+    subjectName: string
+    instructor: string
+    credits: number
+    semester: number
+}
+
+export interface GetSubjectsResponse {
+    subjects: Array<Subject>
+    error: string
+}
+
+export interface GetCollegeQueryResponse {
     getSemester: GetSemesterResponse
+    getSubjects: GetSubjectsResponse
 }
