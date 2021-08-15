@@ -1,15 +1,19 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useQuery } from 'urql'
+import { useMutation, useQuery } from 'urql'
+import { DeleteModal } from '../../components/DeleteModal/DeleteModal'
+import { Modal } from '../../components/Modal/Modal'
 import { OpenUniversalSearch } from '../../components/OpenUniversalSearch/OpenUniversalSearch'
+import { DELETE_TASK } from '../../graphql/deleteTask'
 import { GET_TASKS } from '../../graphql/getTasks'
 import { CollegeTask, GetTasksQueryResponse } from '../../graphql/types'
 import { ifDataFound } from '../../helpers/ifDataFound'
-import { useEventListener } from '../../hooks/useEventListener'
 import { useUniversalSearch } from '../../hooks/useUniversalSearch'
+import { AddCollegeTask } from './AddCollegeTask'
 import {
     CollegeTaskItemContainer,
     CollegeTasksContainer,
+    PositionDeleteModal,
 } from './College.styles'
 
 function CollegeTaskItem({
@@ -18,9 +22,24 @@ function CollegeTaskItem({
     lastDate,
     taskName,
     timeAssigned,
+    taskId,
+    subjectId,
 }: CollegeTask) {
+    const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
+    const [, deleteTaskFn] = useMutation<
+        any,
+        { taskId: number; subjectId: number }
+    >(DELETE_TASK)
+    function openDeleteModal(e: React.MouseEvent<HTMLDivElement>) {
+        e.stopPropagation()
+        setDeleteModalOpen(true)
+    }
+    async function deleteTask() {
+        let s = await deleteTaskFn({ taskId, subjectId })
+        console.log(s)
+    }
     return (
-        <CollegeTaskItemContainer>
+        <CollegeTaskItemContainer onDoubleClick={openDeleteModal}>
             <div className='task-name d-flex'>
                 <p>{taskName}</p>
                 <input type='checkbox' name='completed' />
@@ -36,14 +55,26 @@ function CollegeTaskItem({
                 {comment && <p>{comment}</p>}
                 {completed ? <p>Completed</p> : <p>15 days left</p>}
             </div>
+            <Modal
+                open={deleteModalOpen}
+                setClose={() => setDeleteModalOpen(false)}
+            >
+                <PositionDeleteModal>
+                    <DeleteModal
+                        message='Are you sure you want to delete task?'
+                        deleteTask={deleteTask}
+                    />
+                </PositionDeleteModal>
+            </Modal>
         </CollegeTaskItemContainer>
     )
 }
 
 export function CollegeTasks() {
-    let search = useUniversalSearch()
     let router = useHistory()
-    let subjectId = parseInt(router.location.pathname.substr(15, 1))
+    let search = useUniversalSearch()
+    let subjectId = parseInt(router.location.pathname.substr(15, 2))
+    const [addTaskModalOpen, setAddTaskModalOpen] = useState<boolean>(false)
     const [{ data, fetching }] = useQuery<
         GetTasksQueryResponse,
         { subjectId: number }
@@ -51,20 +82,24 @@ export function CollegeTasks() {
         query: GET_TASKS,
         variables: { subjectId },
     })
-    useEventListener('keydown', (evt) => {
-        evt.preventDefault()
-        if (evt.key === 'Backspace') {
-            router.goBack()
-        }
-    })
     return (
-        <CollegeTasksContainer>
+        <CollegeTasksContainer
+            onDoubleClick={(e) => {
+                setAddTaskModalOpen(true)
+                e.stopPropagation()
+            }}
+        >
             <div className='heading'>
                 {ifDataFound(data, fetching)
                     ? data!.getSubject.subject.subjectName
                     : ''}
             </div>
-            <div className='listOf'>Tasks</div>
+            <div
+                className='listOf'
+                onClick={() => router.push(`/add-college-task/${subjectId}`)}
+            >
+                Tasks
+            </div>
             <div className='tasks-container'>
                 {ifDataFound(data, fetching) ? (
                     <Fragment>
@@ -80,6 +115,14 @@ export function CollegeTasks() {
                     <div></div>
                 )}
             </div>
+            <Modal
+                open={addTaskModalOpen}
+                setClose={() => setAddTaskModalOpen(false)}
+            >
+                <PositionDeleteModal id='pos'>
+                    <AddCollegeTask />
+                </PositionDeleteModal>
+            </Modal>
             <OpenUniversalSearch {...search} />
         </CollegeTasksContainer>
     )

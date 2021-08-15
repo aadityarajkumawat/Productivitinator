@@ -24,6 +24,7 @@ export const GET_TASKS = gql`
                 completedAt
                 comment
             }
+            error
         }
     }
 `

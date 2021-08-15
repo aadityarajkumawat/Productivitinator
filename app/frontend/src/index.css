@@ -24,3 +24,277 @@ body,
 .mr-2 {
     margin-right: 2rem;
 }
+
+#portal
+    > div
+    > #pos
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(1)
+    > div
+    > div
+    > button.react-date-picker__clear-button.react-date-picker__button
+    svg {
+    stroke: #fff;
+}
+
+#portal
+    > div
+    > #pos
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(1)
+    > div
+    > div
+    > button.react-date-picker__calendar-button.react-date-picker__button
+    svg {
+    stroke: #fff;
+}
+
+#portal
+    > div
+    > #pos
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(1)
+    > div
+    > span
+    > div
+    > div {
+    background-color: #222;
+}
+
+#portal
+    > div
+    > #pos
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(1)
+    > div
+    > span
+    > div
+    > div
+    > div.react-calendar__navigation
+    button:hover {
+    background-color: rgb(61, 61, 61);
+}
+
+#portal
+    > div
+    > #pos
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(1)
+    > div
+    > span
+    > div
+    > div
+    > div.react-calendar__viewContainer
+    > div
+    > div
+    > div
+    > div.react-calendar__month-view__days
+    button:hover {
+    background-color: rgb(61, 61, 61);
+}
+
+.react-calendar__tile--now {
+    background-color: rgb(92, 176, 255) !important;
+}
+
+#portal
+    > div
+    > div
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(2)
+    > div
+    > div
+    > button.react-date-picker__clear-button.react-date-picker__button
+    svg {
+    stroke: #fff;
+}
+
+#portal
+    > div
+    > div
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(2)
+    > div
+    > div
+    > button.react-date-picker__calendar-button.react-date-picker__button
+    svg {
+    stroke: #fff;
+}
+
+#portal
+    > div
+    > div
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(2)
+    > div
+    > span
+    > div
+    > div {
+    background-color: #222;
+}
+
+#portal
+    > div
+    > div
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(2)
+    > div
+    > span
+    > div
+    > div
+    > div.react-calendar__navigation
+    button:hover {
+    background-color: rgb(61, 61, 61);
+}
+
+#portal
+    > div
+    > div
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(2)
+    > div
+    > span
+    > div
+    > div
+    > div.react-calendar__viewContainer
+    > div
+    > div
+    > div
+    > div.react-calendar__month-view__days
+    button:hover {
+    background-color: rgb(61, 61, 61);
+}
+
+.react-calendar__tile--now {
+    background-color: rgb(92, 176, 255) !important;
+}
+
+/*  */
+
+#portal
+    > div
+    > div
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(1)
+    > div
+    > div
+    > div
+    > input.react-date-picker__inputGroup__input.react-date-picker__inputGroup__day {
+    width: 60px !important;
+}
+
+#pos
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(1)
+    > div
+    > div
+    > div
+    > input.react-date-picker__inputGroup__input.react-date-picker__inputGroup__month {
+    width: 60px !important;
+}
+
+#pos
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(1)
+    > div
+    > div
+    > div
+    > input.react-date-picker__inputGroup__input.react-date-picker__inputGroup__year {
+    width: 80px !important;
+}
+
+#portal
+    > div
+    > div
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(2)
+    > div
+    > div
+    > div
+    > input.react-date-picker__inputGroup__input.react-date-picker__inputGroup__day {
+    width: 60px !important;
+}
+
+#pos
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(2)
+    > div
+    > div
+    > div
+    > input.react-date-picker__inputGroup__input.react-date-picker__inputGroup__month {
+    width: 60px !important;
+}
+
+#pos
+    > section
+    > div
+    > form
+    > div.input-col
+    > div
+    > div:nth-child(2)
+    > div
+    > div
+    > div
+    > input.react-date-picker__inputGroup__input.react-date-picker__inputGroup__year {
+    width: 80px !important;
+}

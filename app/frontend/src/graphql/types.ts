@@ -62,3 +62,7 @@ export interface GetTasksQueryResponse {
     getTasks: { tasks: Array<CollegeTask>; error: string }
     getSubject: { subject: Subject; error: string }
 }
+
+export interface AddCollegeTaskMutationResponse {
+    addTask: { task: CollegeTask; error: string }
+}

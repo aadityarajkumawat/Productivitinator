@@ -1,26 +1,18 @@
-import { useHistory } from 'react-router-dom'
 import { useQuery } from 'urql'
 import { OpenUniversalSearch } from '../../components/OpenUniversalSearch/OpenUniversalSearch'
 import { SubjectItem } from '../../components/SubjectItem/SubjectItem'
 import { GET_COLLEGE } from '../../graphql/getSemester'
 import { GetCollegeQueryResponse } from '../../graphql/types'
 import { ifDataFound } from '../../helpers/ifDataFound'
-import { useEventListener } from '../../hooks/useEventListener'
 import { useUniversalSearch } from '../../hooks/useUniversalSearch'
 import { CollegeContainer } from './College.styles'
 
 export function College() {
     let search = useUniversalSearch()
-    let router = useHistory()
     const [{ data, fetching }] = useQuery<GetCollegeQueryResponse>({
         query: GET_COLLEGE,
     })
-    useEventListener('keydown', (evt) => {
-        evt.preventDefault()
-        if (evt.key === 'Backspace') {
-            router.goBack()
-        }
-    })
+
     return (
         <CollegeContainer>
             <div className='heading'>
