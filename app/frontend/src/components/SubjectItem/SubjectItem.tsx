@@ -6,6 +6,7 @@ interface SubjectItemProps {
     credits: number
     instructor: string
     subjectId: number
+    index: number
 }
 
 export function SubjectItem({
@@ -13,6 +14,7 @@ export function SubjectItem({
     instructor,
     subjectName,
     subjectId,
+    index,
 }: SubjectItemProps) {
     let router = useHistory()
 
@@ -21,7 +23,12 @@ export function SubjectItem({
     }
 
     return (
-        <SubjectItemContainer onClick={pushToTasks}>
+        <SubjectItemContainer
+            onClick={pushToTasks}
+            initial={{ y: 10 * (index + 1) }}
+            animate={{ y: -10 * (index + 1) }}
+            transition={{ duration: 0.3 }}
+        >
             <div className='subject-name'>{subjectName}</div>
             <div className='credits-and-instructor'>
                 <span>Credits: {credits}</span>

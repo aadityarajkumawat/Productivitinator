@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 
-export const SubjectItemContainer = styled.div`
+export const SubjectItemContainer = styled(motion.div)`
     width: 620px;
     padding: 10px 15px;
     display: flex;

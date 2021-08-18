@@ -36,7 +36,7 @@ export function College() {
             <div>
                 {ifDataFound(data, fetching) ? (
                     data!.getSubjects.subjects.map((subject, idx) => (
-                        <SubjectItem key={idx} {...subject} />
+                        <SubjectItem key={idx} index={idx} {...subject} />
                     ))
                 ) : (
                     <div></div>
