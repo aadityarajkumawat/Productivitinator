@@ -104,3 +104,8 @@ export interface GetDeleteTaskResponse {
     task: CollegeTask | null
     error: string | null
 }
+
+export interface GetTaskMarkedResponse {
+    task: CollegeTask | null
+    error: string | null
+}

@@ -84,6 +84,11 @@ type GetDeleteTaskResponse {
     error: String
 }
 
+type GetTaskMarkedResponse {
+    task: Task
+    error: String
+}
+
 type Query {
     getSubjects: GetSubjectsResponse!
     getUser: GetUserResponse!
@@ -110,4 +115,5 @@ type Mutation {
         comment: String
     ): AddTaskResponse!
     deleteTask(taskId: Int!): GetDeleteTaskResponse!
+    markTask(taskId: Int!): GetTaskMarkedResponse!
 }

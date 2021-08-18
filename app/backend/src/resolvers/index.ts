@@ -12,6 +12,7 @@ import { addTask } from './mutations/addTask'
 import { getTasks } from './queries/getTasks'
 import { getSubject } from './queries/getSubject'
 import { deleteTask } from './mutations/deleteTask'
+import { markTask } from './mutations/markCompleted'
 
 export interface ResolversI {
     Query: {
@@ -28,6 +29,7 @@ export interface ResolversI {
         createSemester: typeof createSemester
         addTask: typeof addTask
         deleteTask: typeof deleteTask
+        markTask: typeof markTask
     }
     Date: GraphQLScalarType
 }
@@ -47,6 +49,7 @@ let Resolvers: ResolversI = {
         createSemester,
         addTask,
         deleteTask,
+        markTask,
     },
     Date: new GraphQLScalarType({
         name: 'Date',
