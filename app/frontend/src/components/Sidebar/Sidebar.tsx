@@ -33,7 +33,10 @@ export function Sidebar() {
     return (
         <SidebarContainer>
             <SidebarProfile>
-                <ProfileImage onClick={pushToHome} />
+                <ProfileImage
+                    onClick={pushToHome}
+                    src='https://www.seekpng.com/png/detail/371-3719264_phineas-flynn3-phineas-and-ferb-cartoon-drawings.png'
+                />
                 <ProfileDetails>
                     <div>
                         {ifDataFound(data, fetching)

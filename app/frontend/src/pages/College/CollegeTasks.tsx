@@ -7,6 +7,7 @@ import { OpenUniversalSearch } from '../../components/OpenUniversalSearch/OpenUn
 import { DELETE_TASK } from '../../graphql/deleteTask'
 import { GET_TASKS } from '../../graphql/getTasks'
 import { CollegeTask, GetTasksQueryResponse } from '../../graphql/types'
+import { getNumberOfDays } from '../../helpers/formatDate'
 import { ifDataFound } from '../../helpers/ifDataFound'
 import { useUniversalSearch } from '../../hooks/useUniversalSearch'
 import { AddCollegeTask } from './AddCollegeTask'
@@ -25,35 +26,60 @@ function CollegeTaskItem({
     taskId,
     subjectId,
 }: CollegeTask) {
+    function formatDate(date: string): string {
+        let formattedString = ''
+        formattedString = `${date.substr(3, 2)}-${date.substr(
+            0,
+            2,
+        )}-${date.substr(6, 4)}`
+        return formattedString
+    }
+
     const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
     const [, deleteTaskFn] = useMutation<
         any,
         { taskId: number; subjectId: number }
     >(DELETE_TASK)
+
     function openDeleteModal(e: React.MouseEvent<HTMLDivElement>) {
         e.stopPropagation()
         setDeleteModalOpen(true)
     }
+
     async function deleteTask() {
-        let s = await deleteTaskFn({ taskId, subjectId })
-        console.log(s)
+        await deleteTaskFn({ taskId, subjectId })
     }
+
     return (
         <CollegeTaskItemContainer onDoubleClick={openDeleteModal}>
             <div className='task-name d-flex'>
                 <p>{taskName}</p>
-                <input type='checkbox' name='completed' />
+                <input
+                    type='checkbox'
+                    name='completed'
+                    onDoubleClick={(e) => {
+                        e.stopPropagation()
+                    }}
+                />
             </div>
             <div className='assigned-submission d-flex'>
                 <div className='wrap'>
                     <span>Date assigned: {timeAssigned}</span>
                     <span>Submission date: {lastDate}</span>
                 </div>
-                {completed && <div className='days-left'>15 days left</div>}
+                {completed && (
+                    <div className='days-left'>
+                        Days left: {getNumberOfDays(timeAssigned, lastDate)}
+                    </div>
+                )}
             </div>
             <div className='task-comment d-flex'>
                 {comment && <p>{comment}</p>}
-                {completed ? <p>Completed</p> : <p>15 days left</p>}
+                {completed ? (
+                    <p>Completed</p>
+                ) : (
+                    <p>Days left: {getNumberOfDays(timeAssigned, lastDate)}</p>
+                )}
             </div>
             <Modal
                 open={deleteModalOpen}
@@ -83,12 +109,7 @@ export function CollegeTasks() {
         variables: { subjectId },
     })
     return (
-        <CollegeTasksContainer
-            onDoubleClick={(e) => {
-                setAddTaskModalOpen(true)
-                e.stopPropagation()
-            }}
-        >
+        <CollegeTasksContainer>
             <div className='heading'>
                 {ifDataFound(data, fetching)
                     ? data!.getSubject.subject.subjectName
@@ -100,7 +121,10 @@ export function CollegeTasks() {
             >
                 Tasks
             </div>
-            <div className='tasks-container'>
+            <div
+                className='tasks-container'
+                onDoubleClick={(e) => setAddTaskModalOpen(true)}
+            >
                 {ifDataFound(data, fetching) ? (
                     <Fragment>
                         {data!.getTasks.tasks.length > 0 ? (

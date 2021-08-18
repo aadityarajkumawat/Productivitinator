@@ -20,6 +20,7 @@ export const SidebarProfile = styled.div`
 export const ProfileImage = styled.img`
     width: 95px;
     height: 95px;
+    border-radius: 5px;
 `
 export const ProfileDetails = styled.div`
     display: flex;
