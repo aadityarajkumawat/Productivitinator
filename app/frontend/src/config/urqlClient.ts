@@ -125,6 +125,7 @@ let client = createClient({
                             },
                         )
                     },
+                    markTask(_result, args, cache, info) {},
                 },
             },
         }),

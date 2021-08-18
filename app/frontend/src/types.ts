@@ -4,3 +4,12 @@ export interface AddSubjectInput {
     credits: number
     semester: number
 }
+
+export interface DeleteTaskInput {
+    taskId: number
+    subjectId: number
+}
+
+export interface MarkTaskInput {
+    taskId: number
+}

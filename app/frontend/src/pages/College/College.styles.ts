@@ -172,7 +172,7 @@ export const AddCollegeTaskContainer = styled.section`
 
 export const PositionDeleteModal = styled.div`
     position: absolute;
-    left: 50%;
+    left: calc(50% + 150px);
     top: 50%;
     transform: translate(-50%, -50%);
 `

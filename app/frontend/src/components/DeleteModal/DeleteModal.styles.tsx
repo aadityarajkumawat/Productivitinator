@@ -23,6 +23,7 @@ export const DeleteModalContainer = styled.div`
                 #ff4a4a 100%
             );
             border-radius: 3px;
+            cursor: pointer;
         }
     }
 `

@@ -66,3 +66,7 @@ export interface GetTasksQueryResponse {
 export interface AddCollegeTaskMutationResponse {
     addTask: { task: CollegeTask; error: string }
 }
+
+export interface MarkTaskMutationResponse {
+    markTask: { task: CollegeTask; error: string }
+}

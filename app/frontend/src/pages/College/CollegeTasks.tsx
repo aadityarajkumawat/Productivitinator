@@ -6,10 +6,12 @@ import { Modal } from '../../components/Modal/Modal'
 import { OpenUniversalSearch } from '../../components/OpenUniversalSearch/OpenUniversalSearch'
 import { DELETE_TASK } from '../../graphql/deleteTask'
 import { GET_TASKS } from '../../graphql/getTasks'
+import { MARK_TASK } from '../../graphql/markTask'
 import { CollegeTask, GetTasksQueryResponse } from '../../graphql/types'
 import { getNumberOfDays } from '../../helpers/formatDate'
 import { ifDataFound } from '../../helpers/ifDataFound'
 import { useUniversalSearch } from '../../hooks/useUniversalSearch'
+import { DeleteTaskInput, MarkTaskInput } from '../../types'
 import { AddCollegeTask } from './AddCollegeTask'
 import {
     CollegeTaskItemContainer,
@@ -27,10 +29,8 @@ function CollegeTaskItem({
     subjectId,
 }: CollegeTask) {
     const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
-    const [, deleteTaskFn] = useMutation<
-        any,
-        { taskId: number; subjectId: number }
-    >(DELETE_TASK)
+    const [, deleteTaskFn] = useMutation<any, DeleteTaskInput>(DELETE_TASK)
+    const [, markTask] = useMutation<any, MarkTaskInput>(MARK_TASK)
 
     function openDeleteModal(e: React.MouseEvent<HTMLDivElement>) {
         e.stopPropagation()
@@ -51,6 +51,8 @@ function CollegeTaskItem({
                     onDoubleClick={(e) => {
                         e.stopPropagation()
                     }}
+                    onClick={async () => markTask({ taskId })}
+                    checked={completed}
                 />
             </div>
             <div className='assigned-submission d-flex'>
