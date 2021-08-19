@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 export const CollegeContainer = styled.div`
@@ -62,7 +63,7 @@ export const CollegeTasksContainer = styled.section`
     }
 `
 
-export const CollegeTaskItemContainer = styled.div`
+export const CollegeTaskItemContainer = styled(motion.div)`
     width: 100%;
     padding: 8px 15px;
     background: #5c5c5c;
@@ -99,11 +100,14 @@ export const CollegeTaskItemContainer = styled.div`
     }
 `
 
-export const AddCollegeTaskContainer = styled.section`
+export const AddCollegeTaskContainer = styled(motion.section)`
     width: 100%;
     justify-content: center;
     display: flex;
     height: fit-content;
+    background-color: #484848;
+    border-radius: 3px;
+    box-shadow: 2px 2px 11px rgba(0, 0, 0, 0.25);
     .form-container {
         width: 700px;
         padding: 15px;

@@ -1,6 +1,7 @@
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-export const DeleteModalContainer = styled.div`
+export const DeleteModalContainer = styled(motion.div)`
     width: 400px;
     padding: 10px;
     background: #444444;

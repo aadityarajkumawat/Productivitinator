@@ -1,6 +1,7 @@
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-export const ModalOverlay = styled.div`
+export const ModalOverlay = styled(motion.div)`
     position: fixed;
     top: 0;
     bottom: 0;

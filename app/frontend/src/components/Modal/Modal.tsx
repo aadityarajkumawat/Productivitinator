@@ -12,7 +12,11 @@ export function Modal({ children, open, setClose }: ModalProps) {
     if (!open) return <Fragment></Fragment>
     return ReactDOM.createPortal(
         <div>
-            <ModalOverlay onClick={setClose} />
+            <ModalOverlay
+                onClick={setClose}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+            />
             {children}
         </div>,
         document.getElementById('portal') as Element,

@@ -13,6 +13,7 @@ import { getTasks } from './queries/getTasks'
 import { getSubject } from './queries/getSubject'
 import { deleteTask } from './mutations/deleteTask'
 import { markTask } from './mutations/markCompleted'
+import { getTask } from './queries/getTask'
 
 export interface ResolversI {
     Query: {
@@ -21,6 +22,7 @@ export interface ResolversI {
         getSemester: typeof getSemester
         getTasks: typeof getTasks
         getSubject: typeof getSubject
+        getTask: typeof getTask
     }
     Mutation: {
         register: typeof register
@@ -41,6 +43,7 @@ let Resolvers: ResolversI = {
         getSemester,
         getTasks,
         getSubject,
+        getTask,
     },
     Mutation: {
         register,

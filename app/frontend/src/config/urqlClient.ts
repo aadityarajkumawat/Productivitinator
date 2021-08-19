@@ -16,7 +16,7 @@ let client = createClient({
         cacheExchange({
             updates: {
                 Mutation: {
-                    addSubject(_result, args, cache, info) {
+                    addSubject(_result, _, cache, __) {
                         let query = gql`
                             query {
                                 getSubjects {
@@ -39,7 +39,7 @@ let client = createClient({
                             return data
                         })
                     },
-                    addTask(_result, args, cache, info) {
+                    addTask(_result, args, cache, _) {
                         let query = gql`
                             query GetTasksAndSubject($subjectId: Int!) {
                                 getTasks(subjectId: $subjectId) {
@@ -67,7 +67,7 @@ let client = createClient({
                             },
                         )
                     },
-                    deleteTask(_result, args, cache, info) {
+                    deleteTask(_result, args, cache, _) {
                         let fields = cache.inspectFields('Query')
                         let requiredQuery = {}
                         for (let field of fields) {
@@ -125,7 +125,21 @@ let client = createClient({
                             },
                         )
                     },
-                    markTask(_result, args, cache, info) {},
+                    markTask(_result, _, cache, __) {
+                        let fields = cache.inspectFields('Query')
+                        console.log(fields)
+
+                        fields
+                            .filter((field) => field.fieldName === 'getTasks')
+                            .forEach((field) => {
+                                cache.invalidate('Query', field.fieldName)
+                                cache.invalidate(
+                                    'Query',
+                                    field.fieldName,
+                                    field.arguments,
+                                )
+                            })
+                    },
                 },
             },
         }),

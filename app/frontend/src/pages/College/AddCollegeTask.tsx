@@ -1,10 +1,11 @@
+import { motion } from 'framer-motion'
 import React, { useState } from 'react'
+import DatePicker from 'react-date-picker'
 import { useHistory } from 'react-router-dom'
 import { useMutation } from 'urql'
 import { ADD_COLLEGE_TASK } from '../../graphql/addCollegeTask'
-import { AddCollegeTaskContainer } from './College.styles'
-import DatePicker from 'react-date-picker'
 import { buildDateString } from '../../helpers/buildDateString'
+import { AddCollegeTaskContainer } from './College.styles'
 
 interface AddTaskInput {
     subjectId: number
@@ -13,7 +14,11 @@ interface AddTaskInput {
     lastDate: Date | string
 }
 
-export function AddCollegeTask() {
+interface AddCollegeTaskProps {
+    closeModal: () => void
+}
+
+export function AddCollegeTask({ closeModal }: AddCollegeTaskProps) {
     let router = useHistory()
     let subjectIdParsed = parseInt(router.location.pathname.substr(15, 2))
     const [addTaskData, setAddTaskData] = useState<AddTaskInput>({
@@ -48,13 +53,22 @@ export function AddCollegeTask() {
             lastDate: buildDateString(lastDate as Date),
             timeAssigned: buildDateString(timeAssigned as Date),
         }
-        let s = await addTask(params)
-        // console.log(s, params)
+        await addTask(params)
+        closeModal()
     }
 
     return (
-        <AddCollegeTaskContainer>
-            <div className='form-container'>
+        <AddCollegeTaskContainer
+            initial={{ height: 0 }}
+            animate={{ height: 'auto' }}
+            transition={{ duration: 0.2 }}
+        >
+            <motion.div
+                className='form-container'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0 }}
+            >
                 <h2>Add college task</h2>
                 <form onSubmit={handleSubmit}>
                     <div className='input-col'>
@@ -66,7 +80,7 @@ export function AddCollegeTask() {
                             onChange={handleChange}
                             autoComplete='off'
                         />
-                        <div className='mr-2 date-container'>
+                        <div className='mr2 date-container'>
                             <div className='input-col mr-2'>
                                 <label htmlFor='timeassigned'>
                                     Date assigned
@@ -93,7 +107,7 @@ export function AddCollegeTask() {
                         <button type='submit'>Add task</button>
                     </div>
                 </form>
-            </div>
+            </motion.div>
         </AddCollegeTaskContainer>
     )
 }

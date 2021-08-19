@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion'
 import React, { Fragment, useState } from 'react'
+import { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useMutation, useQuery } from 'urql'
 import { DeleteModal } from '../../components/DeleteModal/DeleteModal'
@@ -27,7 +29,8 @@ function CollegeTaskItem({
     timeAssigned,
     taskId,
     subjectId,
-}: CollegeTask) {
+    index,
+}: CollegeTask & { index: number }) {
     const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
     const [, deleteTaskFn] = useMutation<any, DeleteTaskInput>(DELETE_TASK)
     const [, markTask] = useMutation<any, MarkTaskInput>(MARK_TASK)
@@ -41,8 +44,17 @@ function CollegeTaskItem({
         await deleteTaskFn({ taskId, subjectId })
     }
 
+    async function toggleChecked() {
+        await markTask({ taskId })
+    }
+
     return (
-        <CollegeTaskItemContainer onDoubleClick={openDeleteModal}>
+        <CollegeTaskItemContainer
+            onDoubleClick={openDeleteModal}
+            initial={{ y: 10 * (index + 1) }}
+            animate={{ y: -0 * (index + 1) }}
+            transition={{ duration: 0.3 }}
+        >
             <div className='task-name d-flex'>
                 <p>{taskName}</p>
                 <input
@@ -51,7 +63,7 @@ function CollegeTaskItem({
                     onDoubleClick={(e) => {
                         e.stopPropagation()
                     }}
-                    onClick={async () => markTask({ taskId })}
+                    onChange={toggleChecked}
                     checked={completed}
                 />
             </div>
@@ -101,6 +113,15 @@ export function CollegeTasks() {
         query: GET_TASKS,
         variables: { subjectId },
     })
+
+    function closeModal() {
+        setAddTaskModalOpen(false)
+    }
+
+    function openModal() {
+        setAddTaskModalOpen(true)
+    }
+
     return (
         <CollegeTasksContainer>
             <div className='heading'>
@@ -114,15 +135,20 @@ export function CollegeTasks() {
             >
                 Tasks
             </div>
-            <div
+            <motion.div
+                layout
                 className='tasks-container'
-                onDoubleClick={(e) => setAddTaskModalOpen(true)}
+                onDoubleClick={openModal}
             >
                 {ifDataFound(data, fetching) ? (
                     <Fragment>
                         {data!.getTasks.tasks.length > 0 ? (
                             data!.getTasks.tasks.map((task, idx) => (
-                                <CollegeTaskItem key={idx} {...task} />
+                                <CollegeTaskItem
+                                    key={idx}
+                                    index={idx}
+                                    {...task}
+                                />
                             ))
                         ) : (
                             <div className='faded-text'>No tasks scheduled</div>
@@ -131,13 +157,10 @@ export function CollegeTasks() {
                 ) : (
                     <div></div>
                 )}
-            </div>
-            <Modal
-                open={addTaskModalOpen}
-                setClose={() => setAddTaskModalOpen(false)}
-            >
+            </motion.div>
+            <Modal open={addTaskModalOpen} setClose={closeModal}>
                 <PositionDeleteModal id='pos'>
-                    <AddCollegeTask />
+                    <AddCollegeTask closeModal={closeModal} />
                 </PositionDeleteModal>
             </Modal>
             <OpenUniversalSearch {...search} />

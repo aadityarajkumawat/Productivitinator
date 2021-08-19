@@ -79,6 +79,11 @@ type GetTaskResponse {
     error: String
 }
 
+type GetTask {
+    task: Task
+    error: String
+}
+
 type GetDeleteTaskResponse {
     task: Task
     error: String
@@ -95,6 +100,7 @@ type Query {
     getSemester: GetSemesterResponse!
     getTasks(subjectId: Int!): GetTaskResponse!
     getSubject(subjectId: Int!): GetSubjectResponse!
+    getTask(taskId: Int!): GetTask!
 }
 
 type Mutation {
