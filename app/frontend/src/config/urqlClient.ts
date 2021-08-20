@@ -9,7 +9,7 @@ import { devtoolsExchange } from '@urql/devtools'
 import { cacheExchange } from '@urql/exchange-graphcache'
 
 let client = createClient({
-    url: 'http://localhost:4000',
+    url: process.env.REACT_APP_API_URL || 'http://localhost:4000',
     fetchOptions: { credentials: 'include' },
     exchanges: [
         devtoolsExchange,
@@ -128,6 +128,7 @@ let client = createClient({
                     markTask(_result, _, cache, __) {
                         let fields = cache.inspectFields('Query')
                         console.log(fields)
+                        console.log(process.env)
 
                         fields
                             .filter((field) => field.fieldName === 'getTasks')
