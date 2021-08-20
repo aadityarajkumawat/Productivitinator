@@ -17,7 +17,13 @@ async function main() {
     server.express.use(sessionMiddleware(process.env.COOKIE_SECRET as string))
     server.start(
         {
-            cors: { origin: 'http://localhost:3000', credentials: true },
+            cors: {
+                origin: [
+                    'http://localhost:3000',
+                    'https://productivitinator.vercel.app',
+                ],
+                credentials: true,
+            },
             port: process.env.PORT,
         },
         (options) => {
