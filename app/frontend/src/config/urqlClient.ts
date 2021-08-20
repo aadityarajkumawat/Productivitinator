@@ -9,7 +9,7 @@ import { devtoolsExchange } from '@urql/devtools'
 import { cacheExchange } from '@urql/exchange-graphcache'
 
 let client = createClient({
-    url: process.env.REACT_APP_API_URL || 'http://localhost:4000',
+    url: 'http://localhost:4000',
     fetchOptions: { credentials: 'include' },
     exchanges: [
         devtoolsExchange,
