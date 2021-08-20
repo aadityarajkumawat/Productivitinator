@@ -40,13 +40,17 @@ export function Sidebar() {
                 <ProfileDetails>
                     <div>
                         {ifDataFound(data, fetching)
-                            ? data!.getUser.user.name
+                            ? data!.getUser.user
+                                ? data!.getUser.user.name
+                                : ''
                             : ''}
                     </div>
                     <ProfileTag>
                         @
                         {ifDataFound(data, fetching)
-                            ? data!.getUser.user.username
+                            ? data!.getUser.user
+                                ? data!.getUser.user.username
+                                : ''
                             : ''}
                     </ProfileTag>
                 </ProfileDetails>
