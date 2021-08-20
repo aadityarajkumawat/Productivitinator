@@ -5,8 +5,8 @@ export async function getSubjects(
     __: any,
     { request, prisma }: ResolverContext,
 ): Promise<GetSubjectsResponse> {
-    if (!request.session.userId)
-        return { subjects: null, error: 'You are not authenticated' }
+    // if (!request.session.userId)
+    //     return { subjects: null, error: 'You are not authenticated' }
 
     try {
         let subjects = await prisma.subject.findMany({

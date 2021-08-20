@@ -7,10 +7,10 @@ import {
 export async function createSemester(
     _: any,
     args: CreateSemesterInput,
-    { request, prisma }: ResolverContext,
+    { prisma }: ResolverContext,
 ): Promise<CreateSemesterResponse> {
-    if (!request.session.userId)
-        return { semester: null, error: 'You are not authenticated' }
+    // if (!request.session.userId)
+    //     return { semester: null, error: 'You are not authenticated' }
 
     try {
         let { semester, semesterEnd } = args
@@ -20,7 +20,7 @@ export async function createSemester(
                 semesterEnd: semesterEnd.toDate(),
                 user: {
                     connect: {
-                        userId: request.session.userId,
+                        userId: 1,
                     },
                 },
             },

@@ -5,8 +5,8 @@ export async function getUser(
     __: any,
     { request, prisma }: ResolverContext,
 ): Promise<GetUserResponse> {
-    if (!request.session.userId)
-        return { user: null, error: 'You are not authenticated' }
+    // if (!request.session.userId)
+    //     return { user: null, error: 'You are not authenticated' }
 
     try {
         let user = await prisma.user.findFirst({

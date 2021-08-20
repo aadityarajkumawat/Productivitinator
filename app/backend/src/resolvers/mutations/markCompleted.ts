@@ -3,11 +3,11 @@ import { GetTaskMarkedResponse, ResolverContext } from '../../types'
 export async function markTask(
     _: any,
     args: { taskId: number },
-    { request, prisma }: ResolverContext,
+    { prisma }: ResolverContext,
 ): Promise<GetTaskMarkedResponse> {
-    if (!request.session.userId) {
-        return { task: null, error: 'User not authenticated' }
-    }
+    // if (!request.session.userId) {
+    //     return { task: null, error: 'User not authenticated' }
+    // }
     const { taskId } = args
     try {
         let task = await prisma.collegeTask.findFirst({ where: { taskId } })

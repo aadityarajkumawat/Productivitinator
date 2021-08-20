@@ -21,6 +21,7 @@ export function sessionMiddleware(SECRET: string) {
             httpOnly: true,
             sameSite: 'lax',
             secure: __prod__,
+            domain: 'vercel.app',
         },
         saveUninitialized: false,
         resave: false,

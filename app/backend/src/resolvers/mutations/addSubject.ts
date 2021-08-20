@@ -3,10 +3,10 @@ import { AddSubjectInput, AddSubjectResponse, ResolverContext } from 'src/types'
 export async function addSubject(
     _: any,
     args: AddSubjectInput,
-    { request, prisma }: ResolverContext,
+    { prisma }: ResolverContext,
 ): Promise<AddSubjectResponse> {
-    if (!request.session.userId)
-        return { subject: null, error: 'You are not authenticated' }
+    // if (!request.session.userId)
+    //     return { subject: null, error: 'You are not authenticated' }
 
     try {
         let subject = await prisma.subject.create({
@@ -14,7 +14,7 @@ export async function addSubject(
                 ...args,
                 user: {
                     connect: {
-                        userId: request.session.userId,
+                        userId: 1,
                     },
                 },
             },

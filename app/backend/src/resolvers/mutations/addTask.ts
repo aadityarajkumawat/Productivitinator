@@ -3,10 +3,10 @@ import { AddTaskInput, AddTaskResponse, ResolverContext } from 'src/types'
 export async function addTask(
     _: any,
     args: AddTaskInput,
-    { request, prisma }: ResolverContext,
+    { prisma }: ResolverContext,
 ): Promise<AddTaskResponse> {
-    if (!request.session.userId)
-        return { task: null, error: 'You are not authenticated' }
+    // if (!request.session.userId)
+    //     return { task: null, error: 'You are not authenticated' }
 
     try {
         let { taskName, lastDate, subjectId, timeAssigned, comment } = args

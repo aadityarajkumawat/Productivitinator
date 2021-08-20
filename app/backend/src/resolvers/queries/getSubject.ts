@@ -7,10 +7,10 @@ import {
 export async function getSubject(
     _: any,
     args: CollegeTasksInput,
-    { request, prisma }: ResolverContext,
+    { prisma }: ResolverContext,
 ): Promise<GetSubjectResponse> {
-    if (!request.session.userId)
-        return { subject: null, error: 'You are not authenticated' }
+    // if (!request.session.userId)
+    //     return { subject: null, error: 'You are not authenticated' }
 
     try {
         let subjectId = args.subjectId

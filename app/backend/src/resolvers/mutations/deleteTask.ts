@@ -3,11 +3,11 @@ import { GetDeleteTaskResponse, ResolverContext } from '../../types'
 export async function deleteTask(
     _: any,
     args: { taskId: number },
-    { request, prisma }: ResolverContext,
+    { prisma }: ResolverContext,
 ): Promise<GetDeleteTaskResponse> {
-    if (!request.session.userId) {
-        return { task: null, error: 'User not authenticated' }
-    }
+    // if (!request.session.userId) {
+    //     return { task: null, error: 'User not authenticated' }
+    // }
     const { taskId } = args
     try {
         let deletedTask = await prisma.collegeTask.delete({

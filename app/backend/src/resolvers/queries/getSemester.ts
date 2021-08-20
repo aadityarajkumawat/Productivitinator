@@ -5,8 +5,8 @@ export async function getSemester(
     __: any,
     { request, prisma }: ResolverContext,
 ): Promise<GetSemesterResponse> {
-    if (!request.session.userId)
-        return { semester: null, error: 'You are not authenticated' }
+    // if (!request.session.userId)
+    //     return { semester: null, error: 'You are not authenticated' }
 
     try {
         let semester = await prisma.semester.findFirst({

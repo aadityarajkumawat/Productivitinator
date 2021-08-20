@@ -17,6 +17,7 @@ export async function login(
             let isPasswordValid = await argon2.verify(user.password, password)
             if (isPasswordValid) {
                 request.session.userId = user.userId
+                console.log('logged')
                 return { user, error: null }
             } else {
                 return { user: null, error: 'Wrong Password' }
