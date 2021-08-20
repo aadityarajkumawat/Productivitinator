@@ -3,8 +3,6 @@ import { useState } from 'react'
 import { useMutation } from 'urql'
 import { LOGIN_USER } from '../../graphql/loginUser'
 
-interface LoginProps {}
-
 interface User {
     username: string
     password: string
