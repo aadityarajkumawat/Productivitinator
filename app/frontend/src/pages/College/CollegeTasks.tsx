@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import React, { Fragment, useState } from 'react'
-import { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useMutation, useQuery } from 'urql'
 import { DeleteModal } from '../../components/DeleteModal/DeleteModal'
