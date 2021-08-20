@@ -18,10 +18,9 @@ export function sessionMiddleware(SECRET: string) {
         secret: SECRET,
         cookie: {
             maxAge: $10_YEARS,
-            httpOnly: true,
+            httpOnly: false,
             sameSite: 'lax',
             secure: __prod__,
-            domain: 'vercel.app',
         },
         saveUninitialized: false,
         resave: false,

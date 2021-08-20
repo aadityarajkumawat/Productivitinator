@@ -5,9 +5,6 @@ export async function addTask(
     args: AddTaskInput,
     { prisma }: ResolverContext,
 ): Promise<AddTaskResponse> {
-    // if (!request.session.userId)
-    //     return { task: null, error: 'You are not authenticated' }
-
     try {
         let { taskName, lastDate, subjectId, timeAssigned, comment } = args
         let collegeTask = await prisma.collegeTask.create({

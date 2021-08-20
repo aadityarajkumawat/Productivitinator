@@ -9,9 +9,6 @@ export async function getSubject(
     args: CollegeTasksInput,
     { prisma }: ResolverContext,
 ): Promise<GetSubjectResponse> {
-    // if (!request.session.userId)
-    //     return { subject: null, error: 'You are not authenticated' }
-
     try {
         let subjectId = args.subjectId
         let subject = await prisma.subject.findFirst({

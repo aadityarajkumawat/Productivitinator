@@ -5,9 +5,6 @@ export async function addSubject(
     args: AddSubjectInput,
     { prisma }: ResolverContext,
 ): Promise<AddSubjectResponse> {
-    // if (!request.session.userId)
-    //     return { subject: null, error: 'You are not authenticated' }
-
     try {
         let subject = await prisma.subject.create({
             data: {

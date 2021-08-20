@@ -9,9 +9,6 @@ export async function getTasks(
     args: CollegeTasksInput,
     { prisma }: ResolverContext,
 ): Promise<GetCollegeTasksResponse> {
-    // if (!request.session.userId)
-    //     return { tasks: null, error: 'You are not authenticated' }
-
     try {
         let tasks = await prisma.collegeTask.findMany({
             where: { subjectId: args.subjectId },

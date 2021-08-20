@@ -5,9 +5,6 @@ export async function markTask(
     args: { taskId: number },
     { prisma }: ResolverContext,
 ): Promise<GetTaskMarkedResponse> {
-    // if (!request.session.userId) {
-    //     return { task: null, error: 'User not authenticated' }
-    // }
     const { taskId } = args
     try {
         let task = await prisma.collegeTask.findFirst({ where: { taskId } })

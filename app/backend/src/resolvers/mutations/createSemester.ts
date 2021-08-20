@@ -9,9 +9,6 @@ export async function createSemester(
     args: CreateSemesterInput,
     { prisma }: ResolverContext,
 ): Promise<CreateSemesterResponse> {
-    // if (!request.session.userId)
-    //     return { semester: null, error: 'You are not authenticated' }
-
     try {
         let { semester, semesterEnd } = args
         let newSemester = await prisma.semester.create({
