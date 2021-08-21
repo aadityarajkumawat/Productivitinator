@@ -7,6 +7,8 @@ import {
 } from 'urql'
 import { devtoolsExchange } from '@urql/devtools'
 import { cacheExchange } from '@urql/exchange-graphcache'
+import { not } from '../helpers/not'
+import { CollegeTask, GetTasksResponse } from '../graphql/types'
 
 let client = createClient({
     url: 'http://localhost:4000',
@@ -67,14 +69,7 @@ let client = createClient({
                             },
                         )
                     },
-                    deleteTask(_result, args, cache, _) {
-                        let fields = cache.inspectFields('Query')
-                        let requiredQuery = {}
-                        for (let field of fields) {
-                            if (field.fieldName === 'getSubject') {
-                                requiredQuery = field
-                            }
-                        }
+                    deleteTask(result, args, cache, _) {
                         let query = gql`
                             query GetTasks($subjectId: Int!) {
                                 getTasks(subjectId: $subjectId) {
@@ -96,7 +91,7 @@ let client = createClient({
                             {
                                 query,
                                 variables: {
-                                    subjectId: (requiredQuery as any).arguments
+                                    subjectId: (result as any).deleteTask.task
                                         .subjectId,
                                 },
                             },
@@ -125,21 +120,39 @@ let client = createClient({
                             },
                         )
                     },
-                    markTask(_result, _, cache, __) {
-                        let fields = cache.inspectFields('Query')
-                        console.log(fields)
-                        console.log(process.env)
+                    markTask(result, args, cache, __) {
+                        let subjectId = (result as any).markTask.task.subjectId
+                        console.log(result)
+                        let taskId = args.taskId
+                        let query = gql`
+                            query GetTasks($subjectId: Int!) {
+                                getTasks(subjectId: $subjectId) {
+                                    tasks {
+                                        taskId
+                                        completed
+                                    }
+                                }
+                            }
+                        `
 
-                        fields
-                            .filter((field) => field.fieldName === 'getTasks')
-                            .forEach((field) => {
-                                cache.invalidate('Query', field.fieldName)
-                                cache.invalidate(
-                                    'Query',
-                                    field.fieldName,
-                                    field.arguments,
-                                )
-                            })
+                        cache.updateQuery(
+                            { query, variables: { subjectId } },
+                            function (
+                                data: { getTasks: GetTasksResponse } | null,
+                            ) {
+                                if (data) {
+                                    let task = data.getTasks.tasks.find(
+                                        (task: CollegeTask) =>
+                                            task.taskId === taskId,
+                                    )
+                                    if (task) {
+                                        task.completed = not(task.completed)
+                                    }
+                                }
+                                console.log(data, subjectId, args.taskId)
+                                return data
+                            },
+                        )
                     },
                 },
             },

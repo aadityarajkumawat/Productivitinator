@@ -58,8 +58,13 @@ export interface CollegeTask {
     comment: string
 }
 
+export interface GetTasksResponse {
+    tasks: Array<CollegeTask>
+    error: string
+}
+
 export interface GetTasksQueryResponse {
-    getTasks: { tasks: Array<CollegeTask>; error: string }
+    getTasks: GetTasksResponse
     getSubject: { subject: Subject; error: string }
 }
 
