@@ -13,6 +13,11 @@ export const SubjectItemContainer = styled(motion.div)`
     box-shadow: 2px 2px 11px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     margin-bottom: 20px;
+    cursor: pointer;
+
+    * {
+        user-select: none;
+    }
 
     .subject-name {
         font-size: 17px;

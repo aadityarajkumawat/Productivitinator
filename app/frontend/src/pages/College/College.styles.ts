@@ -73,6 +73,10 @@ export const CollegeTaskItemContainer = styled(motion.div)`
     border-radius: 3px;
     margin-bottom: 20px;
 
+    * {
+        user-select: none;
+    }
+
     .task-name {
         font-size: 17px;
         justify-content: space-between;
@@ -81,6 +85,7 @@ export const CollegeTaskItemContainer = styled(motion.div)`
         input {
             width: 15px;
             height: 15px;
+            cursor: pointer;
         }
     }
 

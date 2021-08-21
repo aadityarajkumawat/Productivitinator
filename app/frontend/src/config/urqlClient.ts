@@ -75,13 +75,6 @@ let client = createClient({
                                 getTasks(subjectId: $subjectId) {
                                     tasks {
                                         taskId
-                                        subjectId
-                                        taskName
-                                        timeAssigned
-                                        lastDate
-                                        completed
-                                        completedAt
-                                        comment
                                     }
                                     error
                                 }
