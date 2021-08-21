@@ -122,7 +122,6 @@ let client = createClient({
                     },
                     markTask(result, args, cache, __) {
                         let subjectId = (result as any).markTask.task.subjectId
-                        console.log(result)
                         let taskId = args.taskId
                         let query = gql`
                             query GetTasks($subjectId: Int!) {
@@ -149,7 +148,6 @@ let client = createClient({
                                         task.completed = not(task.completed)
                                     }
                                 }
-                                console.log(data, subjectId, args.taskId)
                                 return data
                             },
                         )
