@@ -9,6 +9,7 @@ import { DELETE_TASK } from '../../graphql/deleteTask'
 import { GET_TASKS } from '../../graphql/getTasks'
 import { MARK_TASK } from '../../graphql/markTask'
 import { CollegeTask, GetTasksQueryResponse } from '../../graphql/types'
+import { buildDateString } from '../../helpers/buildDateString'
 import { getNumberOfDays } from '../../helpers/formatDate'
 import { ifDataFound } from '../../helpers/ifDataFound'
 import { useUniversalSearch } from '../../hooks/useUniversalSearch'
@@ -73,7 +74,8 @@ function CollegeTaskItem({
                 </div>
                 {completed && (
                     <div className='days-left'>
-                        Days left: {getNumberOfDays(timeAssigned, lastDate)}
+                        Days left:{' '}
+                        {getNumberOfDays(buildDateString(new Date()), lastDate)}
                     </div>
                 )}
             </div>
@@ -82,7 +84,10 @@ function CollegeTaskItem({
                 {completed ? (
                     <p>Completed</p>
                 ) : (
-                    <p>Days left: {getNumberOfDays(timeAssigned, lastDate)}</p>
+                    <p>
+                        Days left:{' '}
+                        {getNumberOfDays(buildDateString(new Date()), lastDate)}
+                    </p>
                 )}
             </div>
             <Modal
