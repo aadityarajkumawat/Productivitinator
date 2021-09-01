@@ -1,4 +1,3 @@
-import { useHistory } from 'react-router-dom'
 import { SubjectItemContainer } from './SubjectItem.styles'
 
 interface SubjectItemProps {
@@ -16,24 +15,21 @@ export function SubjectItem({
     subjectId,
     index,
 }: SubjectItemProps) {
-    let router = useHistory()
-
-    function pushToTasks() {
-        router.push(`/college-tasks/${subjectId}`)
+    function formatSubjectName(subjectName: string) {
+        if (subjectName.length > 45) {
+            subjectName = subjectName.substr(0, 45) + '...'
+        }
+        return subjectName
     }
 
     return (
-        <SubjectItemContainer
-            onClick={pushToTasks}
-            initial={{ y: 10 * (index + 1) }}
-            animate={{ y: -10 * (index + 1) }}
-            transition={{ duration: 0.3 }}
-        >
-            <div className='subject-name'>{subjectName}</div>
-            <div className='credits-and-instructor'>
+        <SubjectItemContainer>
+            <div className='subject-name'>{formatSubjectName(subjectName)}</div>
+
+            {/* <div className='credits-and-instructor'>
                 <span>Credits: {credits}</span>
                 <span>Instructor: {instructor}</span>
-            </div>
+            </div> */}
         </SubjectItemContainer>
     )
 }

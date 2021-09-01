@@ -6,6 +6,7 @@ import { GetCollegeQueryResponse } from '../../graphql/types'
 import { ifDataFound } from '../../helpers/ifDataFound'
 import { useUniversalSearch } from '../../hooks/useUniversalSearch'
 import { CollegeContainer } from './College.styles'
+import { CollegeTasks } from './CollegeTasks'
 
 export function College() {
     let search = useUniversalSearch()
@@ -33,10 +34,19 @@ export function College() {
                 </span>
             </div>
             <div className='listOf'>Subjects</div>
-            <div>
+            <div className='subjects-list'>
                 {ifDataFound(data, fetching) ? (
                     data!.getSubjects.subjects.map((subject, idx) => (
                         <SubjectItem key={idx} index={idx} {...subject} />
+                    ))
+                ) : (
+                    <div></div>
+                )}
+            </div>
+            <div className='subjects-list'>
+                {ifDataFound(data, fetching) ? (
+                    data!.getSubjects.subjects.map((subject, idx) => (
+                        <CollegeTasks id={subject.subjectId} />
                     ))
                 ) : (
                     <div></div>

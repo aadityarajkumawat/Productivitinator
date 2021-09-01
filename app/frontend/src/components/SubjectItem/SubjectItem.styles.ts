@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { motion } from 'framer-motion'
 
-export const SubjectItemContainer = styled(motion.div)`
-    width: 620px;
+export const SubjectItemContainer = styled.div`
+    width: 260px;
+    height: 60px;
     padding: 10px 15px;
     display: flex;
     flex-direction: column;
@@ -14,6 +14,7 @@ export const SubjectItemContainer = styled(motion.div)`
     border-radius: 5px;
     margin-bottom: 20px;
     cursor: pointer;
+    margin-right: 10px;
 
     * {
         user-select: none;
@@ -21,7 +22,6 @@ export const SubjectItemContainer = styled(motion.div)`
 
     .subject-name {
         font-size: 17px;
-        margin-bottom: 10px;
     }
 
     .credits-and-instructor span {

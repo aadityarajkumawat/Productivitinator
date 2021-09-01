@@ -20,6 +20,11 @@ export const CollegeContainer = styled.div`
         margin: 30px 0;
         font-size: 30px;
     }
+
+    .subjects-list {
+        display: flex;
+        align-items: flex-start;
+    }
 `
 
 export const PositionUSBar = styled.div`
@@ -34,7 +39,7 @@ export const CollegeTasksContainer = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px 10px;
+    margin-right: 10px;
     user-select: none;
 
     .heading {
@@ -47,15 +52,9 @@ export const CollegeTasksContainer = styled.section`
     }
 
     .tasks-container {
-        background: #484848;
-        border: 1px solid #6f6f6f;
         box-sizing: border-box;
-        box-shadow: 2px 2px 11px rgba(0, 0, 0, 0.25);
-        border-radius: 3px;
-        padding: 20px;
-        width: 700px;
-        height: 670px;
-        text-align: center;
+        width: 260px;
+        height: 500px;
     }
 
     .faded-text {
@@ -65,22 +64,27 @@ export const CollegeTasksContainer = styled.section`
 
 export const CollegeTaskItemContainer = styled(motion.div)`
     width: 100%;
-    padding: 8px 15px;
-    background: #5c5c5c;
+    padding: 4px 10px;
+    background: #696969;
     border: 1px solid #737373;
     box-sizing: border-box;
     box-shadow: 2px 2px 11px rgba(0, 0, 0, 0.25);
     border-radius: 3px;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
+    font-size: 15px;
 
     * {
         user-select: none;
     }
 
     .task-name {
-        font-size: 17px;
+        font-size: 15px;
         justify-content: space-between;
-        align-items: center;
+
+        div {
+            width: 100%;
+            margin-right: 5px;
+        }
 
         input {
             width: 15px;
@@ -93,13 +97,15 @@ export const CollegeTaskItemContainer = styled(motion.div)`
         justify-content: space-between;
         font-size: 15px;
         margin: 5px 0;
-        span {
-            margin-right: 20px;
+        font-size: 12px;
+        div label {
+            color: #e5e5e5;
+            margin-right: 3px;
         }
     }
 
     .task-comment {
-        font-size: 15px;
+        font-size: 14px;
         justify-content: space-between;
         align-items: center;
     }

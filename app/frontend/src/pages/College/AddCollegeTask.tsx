@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import React, { useState } from 'react'
 import DatePicker from 'react-date-picker'
-import { useHistory } from 'react-router-dom'
 import { useMutation } from 'urql'
 import { ADD_COLLEGE_TASK } from '../../graphql/addCollegeTask'
 import { buildDateString } from '../../helpers/buildDateString'
@@ -16,18 +15,17 @@ interface AddTaskInput {
 
 interface AddCollegeTaskProps {
     closeModal: () => void
+    subjectId: number
 }
 
-export function AddCollegeTask({ closeModal }: AddCollegeTaskProps) {
-    let router = useHistory()
-    let subjectIdParsed = parseInt(router.location.pathname.substr(15, 2))
+export function AddCollegeTask({ closeModal, subjectId }: AddCollegeTaskProps) {
     const [addTaskData, setAddTaskData] = useState<AddTaskInput>({
-        subjectId: subjectIdParsed,
+        subjectId,
         taskName: '',
         lastDate: new Date(),
         timeAssigned: new Date(),
     })
-    const { subjectId, taskName, lastDate, timeAssigned } = addTaskData
+    const { taskName, lastDate, timeAssigned } = addTaskData
     const [, addTask] = useMutation<any, AddTaskInput>(ADD_COLLEGE_TASK)
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {

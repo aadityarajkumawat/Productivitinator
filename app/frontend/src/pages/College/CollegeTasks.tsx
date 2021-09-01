@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import React, { Fragment, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import { useMutation, useQuery } from 'urql'
 import { DeleteModal } from '../../components/DeleteModal/DeleteModal'
 import { Modal } from '../../components/Modal/Modal'
@@ -34,6 +33,7 @@ function CollegeTaskItem({
     const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
     const [, deleteTaskFn] = useMutation<any, DeleteTaskInput>(DELETE_TASK)
     const [, markTask] = useMutation<any, MarkTaskInput>(MARK_TASK)
+    let daysLeft = getNumberOfDays(buildDateString(new Date()), lastDate)
 
     function openDeleteModal(e: React.MouseEvent<HTMLDivElement>) {
         e.stopPropagation()
@@ -48,6 +48,20 @@ function CollegeTaskItem({
         await markTask({ taskId })
     }
 
+    function taskStatus(days: number) {
+        let status = ''
+        if (completed) {
+            status = 'Done!'
+        } else if (days === 0) {
+            status = 'Last Day'
+        } else if (days === 1) {
+            status = '1 day left'
+        } else if (days > 1) {
+            status = `${days} days left`
+        }
+        return status
+    }
+
     return (
         <CollegeTaskItemContainer
             onDoubleClick={openDeleteModal}
@@ -56,7 +70,9 @@ function CollegeTaskItem({
             transition={{ duration: 0.3 }}
         >
             <div className='task-name d-flex'>
-                <p>{taskName}</p>
+                <div>
+                    <p>{taskName}</p>
+                </div>
                 <input
                     type='checkbox'
                     name='completed'
@@ -69,17 +85,15 @@ function CollegeTaskItem({
             </div>
             <div className='assigned-submission d-flex'>
                 <div className='wrap'>
-                    <span>Date assigned: {timeAssigned}</span>
-                    <span>Submission date: {lastDate}</span>
+                    {/* <span>Date assigned: {timeAssigned}</span> */}
+                    <span className='d-flex'>
+                        <label>Submission date:</label>
+                        <p>{lastDate}</p>
+                    </span>
                 </div>
-                {completed && (
-                    <div className='days-left'>
-                        Days left:{' '}
-                        {getNumberOfDays(buildDateString(new Date()), lastDate)}
-                    </div>
-                )}
+                <div className='days-left'>{taskStatus(daysLeft)}</div>
             </div>
-            <div className='task-comment d-flex'>
+            {/* <div className='task-comment d-flex'>
                 {comment && <p>{comment}</p>}
                 {completed ? (
                     <p>Completed</p>
@@ -89,7 +103,7 @@ function CollegeTaskItem({
                         {getNumberOfDays(buildDateString(new Date()), lastDate)}
                     </p>
                 )}
-            </div>
+            </div> */}
             <Modal
                 open={deleteModalOpen}
                 setClose={() => setDeleteModalOpen(false)}
@@ -105,17 +119,19 @@ function CollegeTaskItem({
     )
 }
 
-export function CollegeTasks() {
-    let router = useHistory()
+interface CollegeTasksProps {
+    id: number
+}
+
+export function CollegeTasks({ id }: CollegeTasksProps) {
     let search = useUniversalSearch()
-    let subjectId = parseInt(router.location.pathname.substr(15, 2))
     const [addTaskModalOpen, setAddTaskModalOpen] = useState<boolean>(false)
     const [{ data, fetching }] = useQuery<
         GetTasksQueryResponse,
         { subjectId: number }
     >({
         query: GET_TASKS,
-        variables: { subjectId },
+        variables: { subjectId: id },
     })
 
     function closeModal() {
@@ -128,17 +144,6 @@ export function CollegeTasks() {
 
     return (
         <CollegeTasksContainer>
-            <div className='heading'>
-                {ifDataFound(data, fetching)
-                    ? data!.getSubject.subject.subjectName
-                    : ''}
-            </div>
-            <div
-                className='listOf'
-                onClick={() => router.push(`/add-college-task/${subjectId}`)}
-            >
-                Tasks
-            </div>
             <motion.div
                 layout
                 className='tasks-container'
@@ -164,7 +169,7 @@ export function CollegeTasks() {
             </motion.div>
             <Modal open={addTaskModalOpen} setClose={closeModal}>
                 <PositionDeleteModal id='pos'>
-                    <AddCollegeTask closeModal={closeModal} />
+                    <AddCollegeTask closeModal={closeModal} subjectId={id} />
                 </PositionDeleteModal>
             </Modal>
             <OpenUniversalSearch {...search} />
