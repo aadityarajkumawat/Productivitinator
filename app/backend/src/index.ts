@@ -1,8 +1,7 @@
+import { PrismaClient } from '@prisma/client'
 import 'dotenv-safe/config'
 import { GraphQLServer } from 'graphql-yoga'
 import path from 'path'
-import { PrismaClient } from '@prisma/client'
-import { sessionMiddleware } from './middlewares/session'
 import Resolvers from './resolvers'
 
 async function main() {
@@ -14,7 +13,7 @@ async function main() {
         context: (options) => ({ ...options, prisma }),
     })
 
-    server.express.use(sessionMiddleware(process.env.COOKIE_SECRET as string))
+    // server.express.use(sessionMiddleware(process.env.COOKIE_SECRET as string))
     server.start(
         {
             cors: {

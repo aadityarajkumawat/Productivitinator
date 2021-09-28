@@ -3,12 +3,12 @@ import { GetSubjectsResponse, ResolverContext } from 'src/types'
 export async function getSubjects(
     _: any,
     __: any,
-    { request, prisma }: ResolverContext,
+    { prisma }: ResolverContext,
 ): Promise<GetSubjectsResponse> {
     try {
         let subjects = await prisma.subject.findMany({
             where: {
-                userId: request.session.userId,
+                userId: 1,
             },
         })
         if (!subjects)

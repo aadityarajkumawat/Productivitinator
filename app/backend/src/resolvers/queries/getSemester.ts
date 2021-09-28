@@ -3,11 +3,11 @@ import { GetSemesterResponse, ResolverContext } from 'src/types'
 export async function getSemester(
     _: any,
     __: any,
-    { request, prisma }: ResolverContext,
+    { prisma }: ResolverContext,
 ): Promise<GetSemesterResponse> {
     try {
         let semester = await prisma.semester.findFirst({
-            where: { userId: request.session.userId },
+            where: { userId: 1 },
         })
         return { semester, error: null }
     } catch (e) {

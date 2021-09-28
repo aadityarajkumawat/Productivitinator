@@ -9,7 +9,7 @@ export function buildDateString(date: Date) {
         ? `0${date.getDate()}`
         : date.getDate().toString() // -> 09
 
-    let month = isSingleDigit(date.getMonth())
+    let month = isSingleDigit(date.getMonth() + 1)
         ? `0${date.getMonth() + 1}`
         : (date.getMonth() + 1).toString() // -> 02
 
