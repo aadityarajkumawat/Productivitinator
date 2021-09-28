@@ -54,7 +54,8 @@ export const CollegeTasksContainer = styled.section`
     .tasks-container {
         box-sizing: border-box;
         width: 260px;
-        height: 500px;
+        height: auto;
+        padding-bottom: 100px;
     }
 
     .faded-text {

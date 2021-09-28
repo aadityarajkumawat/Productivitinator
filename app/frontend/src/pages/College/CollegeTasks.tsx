@@ -85,7 +85,6 @@ function CollegeTaskItem({
             </div>
             <div className='assigned-submission d-flex'>
                 <div className='wrap'>
-                    {/* <span>Date assigned: {timeAssigned}</span> */}
                     <span className='d-flex'>
                         <label>Submission date:</label>
                         <p>{lastDate}</p>
@@ -93,17 +92,6 @@ function CollegeTaskItem({
                 </div>
                 <div className='days-left'>{taskStatus(daysLeft)}</div>
             </div>
-            {/* <div className='task-comment d-flex'>
-                {comment && <p>{comment}</p>}
-                {completed ? (
-                    <p>Completed</p>
-                ) : (
-                    <p>
-                        Days left:{' '}
-                        {getNumberOfDays(buildDateString(new Date()), lastDate)}
-                    </p>
-                )}
-            </div> */}
             <Modal
                 open={deleteModalOpen}
                 setClose={() => setDeleteModalOpen(false)}
