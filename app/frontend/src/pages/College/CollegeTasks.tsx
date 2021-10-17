@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import React, { Fragment, useState } from 'react'
 import { useMutation, useQuery } from 'urql'
-import { DeleteModal } from '../../components/DeleteModal/DeleteModal'
+import { EditCollegeTask } from '../../components/EditCollegeTask/EditCollegeTask'
 import { Modal } from '../../components/Modal/Modal'
 import { OpenUniversalSearch } from '../../components/OpenUniversalSearch/OpenUniversalSearch'
 import { DELETE_TASK } from '../../graphql/deleteTask'
@@ -17,7 +17,7 @@ import { AddCollegeTask } from './AddCollegeTask'
 import {
     CollegeTaskItemContainer,
     CollegeTasksContainer,
-    PositionDeleteModal,
+    PositionModalCenter,
 } from './College.styles'
 
 function CollegeTaskItem({
@@ -31,6 +31,7 @@ function CollegeTaskItem({
     index,
 }: CollegeTask & { index: number }) {
     const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false)
+    const [editTaskModalOpen, setEditTaskModalOpen] = useState<boolean>(false)
     const [, deleteTaskFn] = useMutation<any, DeleteTaskInput>(DELETE_TASK)
     const [, markTask] = useMutation<any, MarkTaskInput>(MARK_TASK)
     let daysLeft = getNumberOfDays(buildDateString(new Date()), lastDate)
@@ -38,6 +39,11 @@ function CollegeTaskItem({
     function openDeleteModal(e: React.MouseEvent<HTMLDivElement>) {
         e.stopPropagation()
         setDeleteModalOpen(true)
+    }
+
+    function openEditTaskModal(e: React.MouseEvent<HTMLDivElement>) {
+        e.stopPropagation()
+        setEditTaskModalOpen(true)
     }
 
     async function deleteTask() {
@@ -64,7 +70,7 @@ function CollegeTaskItem({
 
     return (
         <CollegeTaskItemContainer
-            onDoubleClick={openDeleteModal}
+            onDoubleClick={openEditTaskModal}
             initial={{ y: 10 * (index + 1) }}
             animate={{ y: -0 * (index + 1) }}
             transition={{ duration: 0.3 }}
@@ -93,15 +99,16 @@ function CollegeTaskItem({
                 <div className='days-left'>{taskStatus(daysLeft)}</div>
             </div>
             <Modal
-                open={deleteModalOpen}
-                setClose={() => setDeleteModalOpen(false)}
+                open={editTaskModalOpen}
+                setClose={() => setEditTaskModalOpen(false)}
             >
-                <PositionDeleteModal>
-                    <DeleteModal
-                        message='Are you sure you want to delete task?'
-                        deleteTask={deleteTask}
+                <PositionModalCenter>
+                    <EditCollegeTask
+                        taskId={taskId}
+                        subjectId={subjectId}
+                        closeModal={() => setEditTaskModalOpen(false)}
                     />
-                </PositionDeleteModal>
+                </PositionModalCenter>
             </Modal>
         </CollegeTaskItemContainer>
     )
@@ -156,9 +163,9 @@ export function CollegeTasks({ id }: CollegeTasksProps) {
                 )}
             </motion.div>
             <Modal open={addTaskModalOpen} setClose={closeModal}>
-                <PositionDeleteModal id='pos'>
+                <PositionModalCenter id='pos'>
                     <AddCollegeTask closeModal={closeModal} subjectId={id} />
-                </PositionDeleteModal>
+                </PositionModalCenter>
             </Modal>
             <OpenUniversalSearch {...search} />
         </CollegeTasksContainer>

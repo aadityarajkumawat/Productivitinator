@@ -13,6 +13,7 @@ export function DeleteModal({ message, deleteTask }: DeleteModalProps) {
         e.stopPropagation()
         deleteTask()
     }
+
     return (
         <DeleteModalContainer
             initial={{ height: 0 }}

@@ -186,7 +186,7 @@ export const AddCollegeTaskContainer = styled(motion.section)`
     }
 `
 
-export const PositionDeleteModal = styled.div`
+export const PositionModalCenter = styled.div`
     position: absolute;
     left: calc(50% + 150px);
     top: 50%;
